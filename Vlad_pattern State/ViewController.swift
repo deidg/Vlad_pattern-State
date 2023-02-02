@@ -45,7 +45,9 @@ class ViewController: UIViewController {
     // constraints
     func setupItemsOnScreen() {
         view.addSubview(textField)
-        textField.snp.
+        textField.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     @objc func buttonPressed(sender: UIButton) {

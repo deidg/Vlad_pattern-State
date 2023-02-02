@@ -7,12 +7,13 @@
 import UIKit
 import Foundation
 
-class MyReverser
-
-
-@objc func reverseTextFunc(textToReverse: String) {
-    let text = 
+class MyReverser {
+    
+    
+    //@objc func reverseTextFunc(textToReverse: String) {
+    //    let text =
+    //}
+    
 }
-
 
 
