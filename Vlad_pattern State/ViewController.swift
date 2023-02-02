@@ -6,7 +6,11 @@
 //
 
 import UIKit
-//import SnapKit
+import Foundation
+import SnapKit
+
+
+
 
 class ViewController: UIViewController {
     
@@ -41,7 +45,7 @@ class ViewController: UIViewController {
     // constraints
     func setupItemsOnScreen() {
         view.addSubview(textField)
-        textField.
+        textField.snp.
     }
     
     @objc func buttonPressed(sender: UIButton) {
