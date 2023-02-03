@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     
     var appState: State = .start {
         didSet {
-            manageState(state)
+            manageState(appState)
         }
     }
     
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setupItemsOnScreen()
         defaultConfiguration()
+        manageState(appState)
         
 //        startState()
 //        fillState()
@@ -40,7 +41,7 @@ class ViewController: UIViewController {
         textField.isEnabled = true
         return textField
     }()
-    let label: UILabel = {
+    var label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .orange
         label.textAlignment = .center
@@ -49,7 +50,7 @@ class ViewController: UIViewController {
     let button: UIButton = {
         let button = UIButton()
         button.setTitle("Reverse", for: .normal)
-        button.backgroundColor = UIColor(red: 199, green: 199, blue: 255, alpha: 0.6)
+        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
         button.isEnabled = true
         return button
     }()
@@ -100,17 +101,27 @@ class ViewController: UIViewController {
         func fillState() {
             print("FILL state initialied")
 
+           
+            
             button.isEnabled = false
-            button.backgroundColor = UIColor(red: 199, green: 199, blue: 255, alpha: 1)
+            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
 
             return
         }
    
-        func resultState(result: result) {
+        func resultState() { // (result: textToReverse) {
             print("RESULT state initialied")
             
+            func reverseTextFunc(textToReverse: String) -> String {
+                let text = String(textToReverse.reversed())
+                print("text from MyReverser - \(text)")
+                return text
+            }
+            let reversedText = reverseTextFunc(textToReverse: textField.text ?? "")
+            label.text = reversedText
             
-            State = .start
+            button.setTitle("Clear", for: .normal)
+             startState()
             return
         }
 
@@ -120,7 +131,7 @@ class ViewController: UIViewController {
             startState()
         case .fill: //(text: <#T##String#>):
             fillState()
-        case .result: (result: result)
+        case .result: //(result: textToReverse)
             resultState()
         }
         
@@ -148,6 +159,10 @@ class ViewController: UIViewController {
     
 }
 
+func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    fillState()
+  }
+
 extension ViewController {
     
     enum State {   // множество состояний для построения приложения через паттер State
@@ -157,6 +172,4 @@ extension ViewController {
     }
 }
 
-func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     view.endEditing(true)
- }
+
