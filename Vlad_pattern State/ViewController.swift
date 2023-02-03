@@ -14,7 +14,7 @@ import SnapKit
 
 class ViewController: UIViewController {
     
-    var appState: State = .start {
+    var appState: StateEnum = .start {
         didSet {
             manageState(appState)
         }
@@ -48,6 +48,8 @@ class ViewController: UIViewController {
         button.setTitle("Reverse", for: .normal)
         button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
         button.isEnabled = true
+//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
         return button
     }()
     
@@ -78,10 +80,8 @@ class ViewController: UIViewController {
     }
     
     
-    func manageState(_ state: State) {
-        
-        
-        
+    func manageState(_ state: StateEnum) {
+
         func startState() {
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             print("State 1 (START state) initialied")
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         }
         
         
-        switch state {
+        switch appState {
         case .start:
             startState()
         case .fill: //(text: <#T##String#>):
@@ -134,7 +134,8 @@ class ViewController: UIViewController {
                 label.text = ""
                 button.setTitle("Reverse", for: .normal)
             }
-            
+            reset()
+        
             switch appState {
             case .start:
                 break
@@ -154,13 +155,15 @@ class ViewController: UIViewController {
     }
     
     
+    
+    
 }
 
 
 
 extension ViewController {
     
-    enum State {   // множество состояний для построения приложения через паттер State
+    enum StateEnum {   // множество состояний для построения приложения через паттер State
         case start
         case fill //(text: String)
         case result//(result: String)
@@ -183,3 +186,7 @@ extension ViewController {
  
  
  */
+
+
+
+// начать с обдумывания экранов
