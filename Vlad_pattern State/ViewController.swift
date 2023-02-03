@@ -124,10 +124,19 @@ class ViewController: UIViewController {
         func reverse(textToReverse: String){ // -> String {
             let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
             label.text = reversedText
+            appState = .result
             return
         }
         reverse(textToReverse: textToReverse)
     }
+    func reset() {
+        appState = .start
+        label.text = ""
+        button.setTitle("Reverse", for: .normal)
+    }
+    
+    
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         //     view.endEditing(true)
@@ -145,7 +154,7 @@ extension ViewController {
     enum State {   // множество состояний для построения приложения через паттер State
         case start
         case fill //(text: String)
-        case result(result: String)
+        case result//(result: String)
     }
 }
 
