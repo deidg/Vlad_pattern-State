@@ -28,17 +28,14 @@ class ViewController: UIViewController {
         textField.placeholder = "Enter your text"
         textField.textColor = .white
         textField.isEnabled = true
-
         return textField
     }()
-    
     let label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .orange
         label.textAlignment = .center
         return label
     }()
-    
     let button: UIButton = {
         let button = UIButton()
         button.setTitle("Reverse", for: .normal)
@@ -54,14 +51,12 @@ class ViewController: UIViewController {
             make.leading.trailing.equalToSuperview().inset(50)
             make.center.equalToSuperview()
         }
-        
         view.addSubview(label)
         label.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.top.equalToSuperview().offset(100)
             make.height.equalTo(150)
         }
-        
         view.addSubview(button)
         button.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
