@@ -73,30 +73,18 @@ class ViewController: UIViewController {
     }
     
     func defaultConfiguration() {
-       print("hello from default config")
+        print("default config loaded")
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     
     func manageState(_ state: State) {
         
-       
+        
         
         func startState() {
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-            func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-                 view.endEditing(true)
-         button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-             }
-            print("START state initialied")
-            func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) { //-> Bool {
-                if let text = textField.text,
-                   let textRange = Range(range, in: text) {
-                    let updatedText = text.replacingCharacters(in: textRange, with: string)
-                    appState = .fill
-                }}
-            
-            
+            print("State 1 (START state) initialied")
             button.isEnabled = true
             return
         }
@@ -104,23 +92,20 @@ class ViewController: UIViewController {
         func fillState() {
             print("FILL state initialied")
             button.backgroundColor = .green
+            //            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+            
             button.isEnabled = false
             return
         }
-   
+        
         func resultState() { // (result: textToReverse) {
             print("RESULT state initialied")
-            func reverseTextFunc(textToReverse: String) -> String {
-                let text = String(textToReverse.reversed())
-                return text
-            }
-            let reversedText = reverseTextFunc(textToReverse: textField.text ?? "")
-            label.text = reversedText
+            
             button.setTitle("Clear", for: .normal)
-             startState()
+            startState()
             return
         }
-
+        
         
         switch state {
         case .start:
@@ -133,7 +118,7 @@ class ViewController: UIViewController {
     }
     
     @objc func buttonPressed(sender: UIButton) {
-
+        
         let textToReverse: String = textField.text ?? ""
         
         func reverse(textToReverse: String){ // -> String {
@@ -144,8 +129,16 @@ class ViewController: UIViewController {
         reverse(textToReverse: textToReverse)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //     view.endEditing(true)
+        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+        appState = .fill
+    }
+    
     
 }
+
+
 
 extension ViewController {
     
@@ -157,3 +150,18 @@ extension ViewController {
 }
 
 
+
+
+/*
+ 
+ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) { //-> Bool {
+ if let text = textField.text,
+ let textRange = Range(range, in: text) {
+ let updatedText = text.replacingCharacters(in: textRange, with: string)
+ }
+ 
+ }
+ 
+ 
+ 
+ */
