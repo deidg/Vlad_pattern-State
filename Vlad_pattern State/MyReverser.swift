@@ -10,10 +10,10 @@ import Foundation
 class MyReverser {
     
     
-    @objc func reverseTextFunc(textToReverse: String) {
-        let text = textToReverse.reversed()
+    @objc func reverseTextFunc(textToReverse: String) -> String {
+        let text = String(textToReverse.reversed())
         print("text from MyReverser - \(text)")
-        return
+        return text
     }
     
 }

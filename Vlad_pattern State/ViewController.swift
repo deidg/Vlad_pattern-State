@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         defaultConfiguration()
     }
     
+    let reverser = MyReverser()
+    
     let textField: UITextField = {
         let textField = UITextField()
         textField.backgroundColor = .green
@@ -33,7 +35,7 @@ class ViewController: UIViewController {
     let label: UILabel = {
         let label = UILabel()
         label.backgroundColor = .orange
-        
+        label.textAlignment = .center
         return label
     }()
     
@@ -76,22 +78,17 @@ class ViewController: UIViewController {
     
     
     @objc func buttonPressed(sender: UIButton) {
-//        func printing() {
-//            label.text = textField.text
-//            let textToReverse = textField.text
-//            print("func printing valid and textToReverse - \(textToReverse ?? "")")
-//            return
-//        }
-//        printing()
-        let textToReverse = textField.text
-        print("текст для разворота - \(textToReverse ?? "")")
+
+        let textToReverse: String = textField.text ?? ""
+        print("текст для разворота - \(textToReverse )")
         
-//        func reverse(textToReverse: String) -> String {
-//            let reversedText =  MyReverser.reverseTextFunc()
-//            print(reversedText)
-//        }
-        let reversedText = MyReverser.reverseTextFunc(textToReverse: String)
-        print(reversedText)
+        func reverse(textToReverse: String){ // -> String {
+            let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
+            print("развернутый текст - \(reversedText)")
+            label.text = reversedText
+            return
+        }
+        reverse(textToReverse: textToReverse)
     }
     
     
