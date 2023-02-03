@@ -119,22 +119,31 @@ class ViewController: UIViewController {
     
     @objc func buttonPressed(sender: UIButton) {
         
-        let textToReverse: String = textField.text ?? ""
-        
-        func reverse(textToReverse: String){ // -> String {
-            let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
-            label.text = reversedText
-            appState = .result
-            return
+            let textToReverse: String = textField.text ?? ""
+            
+            func reverse(textToReverse: String){ // -> String {
+                let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
+                label.text = reversedText
+                appState = .result
+                return
+            }
+            reverse(textToReverse: textToReverse)
+            
+            func reset() {
+                appState = .start
+                label.text = ""
+                button.setTitle("Reverse", for: .normal)
+            }
+            
+            switch appState {
+            case .start:
+                break
+            case .fill:
+                reverse(textToReverse: textToReverse)
+            case .result:
+                reset()
+            }
         }
-        reverse(textToReverse: textToReverse)
-    }
-    func reset() {
-        appState = .start
-        label.text = ""
-        button.setTitle("Reverse", for: .normal)
-    }
-    
     
     
     
