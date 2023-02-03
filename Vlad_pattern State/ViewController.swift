@@ -25,10 +25,6 @@ class ViewController: UIViewController {
         setupItemsOnScreen()
         defaultConfiguration()
         manageState(appState)
-        
-//        startState()
-//        fillState()
-//        resultState()
     }
     
     let reverser = MyReverser()
@@ -72,7 +68,6 @@ class ViewController: UIViewController {
         button.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview().inset(16)
             make.height.equalTo(60)
-//            make.top.equalTo(answerTextView.snp.bottom).offset(20)
             make.bottom.equalToSuperview().offset(-66)
         }
     }
@@ -91,35 +86,36 @@ class ViewController: UIViewController {
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
                  view.endEditing(true)
+         button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
              }
-            
             print("START state initialied")
+            func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) { //-> Bool {
+                if let text = textField.text,
+                   let textRange = Range(range, in: text) {
+                    let updatedText = text.replacingCharacters(in: textRange, with: string)
+                    appState = .fill
+                }}
+            
+            
             button.isEnabled = true
             return
         }
         
         func fillState() {
             print("FILL state initialied")
-
-           
-            
+            button.backgroundColor = .green
             button.isEnabled = false
-            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-
             return
         }
    
         func resultState() { // (result: textToReverse) {
             print("RESULT state initialied")
-            
             func reverseTextFunc(textToReverse: String) -> String {
                 let text = String(textToReverse.reversed())
-                print("text from MyReverser - \(text)")
                 return text
             }
             let reversedText = reverseTextFunc(textToReverse: textField.text ?? "")
             label.text = reversedText
-            
             button.setTitle("Clear", for: .normal)
              startState()
             return
@@ -134,22 +130,14 @@ class ViewController: UIViewController {
         case .result: //(result: textToReverse)
             resultState()
         }
-        
-        
     }
-    
-    
-    
-    
     
     @objc func buttonPressed(sender: UIButton) {
 
         let textToReverse: String = textField.text ?? ""
-        print("текст для разворота - \(textToReverse )")
         
         func reverse(textToReverse: String){ // -> String {
             let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
-            print("развернутый текст - \(reversedText)")
             label.text = reversedText
             return
         }
@@ -158,10 +146,6 @@ class ViewController: UIViewController {
     
     
 }
-
-func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    fillState()
-  }
 
 extension ViewController {
     
