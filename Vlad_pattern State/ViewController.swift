@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         setupItemsOnScreen()
         defaultConfiguration()
         manageState(appState)
+        textField.delegate = self
     }
     
     let reverser = MyReverser()
@@ -92,8 +93,7 @@ class ViewController: UIViewController {
         func fillState() {
             print("FILL state initialied")
             button.backgroundColor = .green
-            //            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-            
+            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
             button.isEnabled = false
             return
         }
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         }
         
         
-        switch appState {
+        switch appState {  // switch в рамках manageState
         case .start:
             startState()
         case .fill: //(text: <#T##String#>):
@@ -129,34 +129,32 @@ class ViewController: UIViewController {
             }
             reverse(textToReverse: textToReverse)
             
-            func reset() {
-                appState = .start
-                label.text = ""
-                button.setTitle("Reverse", for: .normal)
-            }
-            reset()
+//            func reset() {
+//                appState = .start
+//                label.text = ""
+//                button.setTitle("Reverse", for: .normal)
+//            }
+//            reset()
         
-            switch appState {
+            switch appState {   //switch  в рамках функции buttonPressed
             case .start:
                 break
             case .fill:
                 reverse(textToReverse: textToReverse)
             case .result:
-                reset()
+//                reset()
+                print("case result")
             }
         }
     
     
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        //     view.endEditing(true)
-        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-        appState = .fill
-    }
-    
-    
-    
-    
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        //     view.endEditing(true)
+//        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+//        appState = .fill
+//    }
+//
 }
 
 
@@ -170,7 +168,24 @@ extension ViewController {
     }
 }
 
-
+extension ViewController: UITextFieldDelegate {
+    //отслеживает изменение текста в моменте
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+           let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            if updatedText == "" {
+                appState = .start
+                
+            } else {
+//                divider.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+                appState = .fill // (text: updatedText)
+                
+            }
+        }
+        return true
+    }
+}
 
 
 /*
