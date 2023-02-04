@@ -49,8 +49,6 @@ class ViewController: UIViewController {
         button.setTitle("Reverse", for: .normal)
         button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
         button.isEnabled = false
-        //        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-        
         return button
     }()
     
@@ -84,14 +82,11 @@ class ViewController: UIViewController {
     func manageState(_ state: StateEnum) {
         
         func startState() {
-//            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             print("State 1 (START state) initialied")
             
             label.text = ""
             textField.placeholder = "Enter your text"
             button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
-
-            
             return
         }
         
@@ -100,8 +95,6 @@ class ViewController: UIViewController {
             //            button.backgroundColor = .green
             button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
             button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-//            button.addTarget(self, action: #selector(buttonPressed(sender: button)), for: .touchUpInside)
-
             button.isEnabled = true
 //            button.isEnabled = false
             return
@@ -109,9 +102,10 @@ class ViewController: UIViewController {
         
         func resultState() { // (result: textToReverse) {
             print("RESULT state initialied")
+            button.setTitle("Clear", for: .normal)
+
         button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
-            button.setTitle("Clear", for: .normal)
 //            startState()
             return
         }
@@ -159,18 +153,6 @@ class ViewController: UIViewController {
     }
 }
 
-    
-    
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //        //     view.endEditing(true)
-    //        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-    //        appState = .fill
-    //    }
-    //
-//}
-
-
-
 extension ViewController {
     
     enum StateEnum {   // множество состояний для построения приложения через паттер State
@@ -198,22 +180,3 @@ extension ViewController: UITextFieldDelegate {
         return true
     }
 }
-
-
-/*
- 
- func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) { //-> Bool {
- if let text = textField.text,
- let textRange = Range(range, in: text) {
- let updatedText = text.replacingCharacters(in: textRange, with: string)
- }
- 
- }
- 
- 
- 
- */
-
-
-
-// начать с обдумывания экранов
