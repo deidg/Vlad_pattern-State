@@ -48,9 +48,9 @@ class ViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Reverse", for: .normal)
         button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
-        button.isEnabled = true
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-
+        button.isEnabled = false
+        //        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
         return button
     }()
     
@@ -77,32 +77,42 @@ class ViewController: UIViewController {
     
     func defaultConfiguration() {
         print("default config loaded")
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
     
     func manageState(_ state: StateEnum) {
-
+        
         func startState() {
-            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             print("State 1 (START state) initialied")
-            button.isEnabled = true
+            
+            label.text = ""
+            textField.placeholder = "Enter your text"
+            button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
+
+            
             return
         }
         
         func fillState() {
             print("FILL state initialied")
-            button.backgroundColor = .green
+            //            button.backgroundColor = .green
             button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-            button.isEnabled = false
+            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//            button.addTarget(self, action: #selector(buttonPressed(sender: button)), for: .touchUpInside)
+
+            button.isEnabled = true
+//            button.isEnabled = false
             return
         }
         
         func resultState() { // (result: textToReverse) {
             print("RESULT state initialied")
-            
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
             button.setTitle("Clear", for: .normal)
-            startState()
+//            startState()
             return
         }
         
@@ -119,43 +129,45 @@ class ViewController: UIViewController {
     
     @objc func buttonPressed(sender: UIButton) {
         
-            let textToReverse: String = textField.text ?? ""
-            
-            func reverse(textToReverse: String){ // -> String {
-                let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
-                label.text = reversedText
-                appState = .result
-                return
-            }
-            reverse(textToReverse: textToReverse)
-            
-//            func reset() {
-//                appState = .start
-//                label.text = ""
-//                button.setTitle("Reverse", for: .normal)
-//            }
-//            reset()
+        let textToReverse: String = textField.text ?? ""
         
-            switch appState {   //switch  в рамках функции buttonPressed
-            case .start:
-                break
-            case .fill:
-                reverse(textToReverse: textToReverse)
-            case .result:
-//                reset()
-                print("case result")
-            }
+        func reverse(textToReverse: String){ // -> String {
+            let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
+            label.text = reversedText
+            appState = .result
+            print("статус appState перешёл в result")
+            return
         }
-    
-    
-    
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        //     view.endEditing(true)
-//        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-//        appState = .fill
-//    }
-//
+        reverse(textToReverse: textToReverse)
+        
+//        func reset() {
+//            appState = .start
+//            label.text = ""
+//            button.setTitle("Reverse", for: .normal)
+//        }
+//        reset()
+        
+        switch appState {   //switch  в рамках функции buttonPressed
+        case .start:
+            break
+        case .fill:
+            reverse(textToReverse: textToReverse)
+        case .result:
+//          reset()
+            print("case result")
+        }
+    }
 }
+
+    
+    
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //        //     view.endEditing(true)
+    //        button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+    //        appState = .fill
+    //    }
+    //
+//}
 
 
 
@@ -178,7 +190,7 @@ extension ViewController: UITextFieldDelegate {
                 appState = .start
                 
             } else {
-//                divider.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
+                //                divider.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
                 appState = .fill // (text: updatedText)
                 
             }
