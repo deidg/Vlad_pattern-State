@@ -24,6 +24,27 @@ verride func viewDidLoad() {
 //}
 
 
+switch appState {  // switch в рамках manageState
+case .start:
+    startState()
+case .fill: //(text: <#T##String#>):
+    fillState()
+case .result: //(result: textToReverse)
+    resultState()
+}
+}
+
+@objc func buttonPressed(sender: UIButton) {
+
+let textToReverse: String = textField.text ?? ""
+
+func reverse(textToReverse: String){ // -> String {
+    let reversedText =  reverser.reverseTextFunc(textToReverse: textToReverse)
+    label.text = reversedText
+    appState = .result
+    print("статус appState перешёл в result")
+    return
+
 
 extension ViewController {
 
