@@ -75,9 +75,10 @@ class ViewController: UIViewController {
     
     func defaultConfiguration() {
         print("default config loaded")
-//        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
+
     
     func manageState(_ state: StateEnum) {
         
@@ -86,6 +87,7 @@ class ViewController: UIViewController {
             
             label.text = ""
             textField.placeholder = "Enter your text"
+            textField.text = ""
             button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 0.6)
             return
         }
@@ -94,7 +96,7 @@ class ViewController: UIViewController {
             print("FILL state initialied")
             //            button.backgroundColor = .green
             button.backgroundColor = UIColor(red: 0/255, green: 122/255, blue: 255/255, alpha: 1)
-            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+//            button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
             button.isEnabled = true
 //            button.isEnabled = false
             return
@@ -104,7 +106,6 @@ class ViewController: UIViewController {
             print("RESULT state initialied")
             button.setTitle("Clear", for: .normal)
 
-        button.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
 
 //            startState()
             return
@@ -132,13 +133,13 @@ class ViewController: UIViewController {
             print("статус appState перешёл в result")
             return
         }
-        reverse(textToReverse: textToReverse)
+//        reverse(textToReverse: textToReverse)
         
-//        func reset() {
-//            appState = .start
-//            label.text = ""
-//            button.setTitle("Reverse", for: .normal)
-//        }
+        func reset() {
+            appState = .start
+                    label.text = ""
+            button.setTitle("Reverse", for: .normal)
+        }
 //        reset()
         
         switch appState {   //switch  в рамках функции buttonPressed
@@ -147,7 +148,7 @@ class ViewController: UIViewController {
         case .fill:
             reverse(textToReverse: textToReverse)
         case .result:
-//          reset()
+          reset()
             print("case result")
         }
     }
